@@ -139,6 +139,114 @@
                     }
                 },
                 "type": "object"
+            },
+            "Comment": {
+                "description": "Comment model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the comment",
+                        "type": "integer"
+                    },
+                    "post_id": {
+                        "description": "ID of the post",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "description": "Content of the comment",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Post": {
+                "description": "Post model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the post",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "description": "ID of the user who created the post",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Title of the post",
+                        "type": "string"
+                    },
+                    "content": {
+                        "description": "Content of the post",
+                        "type": "string"
+                    },
+                    "published_at": {
+                        "description": "Publication date and time of the post",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "published": {
+                        "description": "Publication status of the post",
+                        "type": "boolean"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Tag"
+                        }
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Comment"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Tag": {
+                "description": "Tag model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the tag",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the tag",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the user",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the user",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of the user",
+                        "type": "string"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Comment"
+                        }
+                    },
+                    "posts": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Post"
+                        }
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
