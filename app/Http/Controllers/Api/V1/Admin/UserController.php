@@ -4,19 +4,17 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Gate;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        if(!Gate::allows('is_admin')){
-            return response()->json(['message'=>'Permission Denied'],403,);
-        }
-        return response()->json(User::all());
+        return response()->json(User::paginate(8));
     }
 
     /**
@@ -24,9 +22,6 @@ class UserController extends Controller
      */
     public function show(string $id): \Illuminate\Http\JsonResponse
     {
-        if(!Gate::allows('is_admin')){
-            return response()->json(['message'=>'Permission Denied'],403);
-        }
         $user = User::all()->find($id);
         if($user == null){
             return response()->json(['message'=>'User not found'],404);
@@ -39,14 +34,16 @@ class UserController extends Controller
      */
     public function destroy(string $id): \Illuminate\Http\JsonResponse
     {
-        if(!Gate::allows('is_admin')){
-            return response()->json(['message'=>'Permission Denied'],403);
-        }
         $user = User::all()->find($id);
         if($user == null){
             return response()->json(['message'=>'User not found'],404);
         }
         $user->delete();
         return response()->json(['message'=>'User successfully delete'],200);
+    }
+
+    public static function middleware(): array
+    {
+        return ['admin'];
     }
 }

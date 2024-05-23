@@ -23,7 +23,13 @@ class Post extends Model
     }
 
 
-    public function tags(){
-        return $this->belongsToMany(Tag::class,'post_tag','post_id','tag_id');
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+    }
+
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
