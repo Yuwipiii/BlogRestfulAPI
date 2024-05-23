@@ -4,7 +4,19 @@ namespace App\Http\Requests\Admin\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    schema: "StorePostRequest",
+    required: ["user_id","title", "content", "tags"],
+    properties: [
+        new OA\Property("user_id", type: "integer"),
+        new OA\Property(property: "title", type: "string"),
+        new OA\Property(property: "content", type: "string"),
+        new OA\Property(property: "tags", type: "array", items: new OA\Items(type: "integer")),
+        new OA\Property(property: "published", type: "boolean")
+    ]
+)]
 class StorePostRequest extends FormRequest
 {
     /**

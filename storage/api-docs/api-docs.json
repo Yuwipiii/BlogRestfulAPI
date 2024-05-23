@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Blog Restful Api",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all posts",
+                "operationId": "b72cf9a0d3fc5b581704f37544dcabd0",
+                "responses": {
+                    "200": {
+                        "description": "Get list of all posts."
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Create a new post",
+                "operationId": "c8077d2d8e4c978334bdda870b30f580",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Post created successfully."
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/posts/{id}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get a single post",
+                "operationId": "0cd542c8e540e13a24b55eaa9c9befad",
+                "responses": {
+                    "200": {
+                        "description": "Get a single post."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Update an existing post",
+                "operationId": "5540e078e8094054fc2e0e2e3e9fa51c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post updated successfully."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Delete a post",
+                "operationId": "06a949b26c820d24557405ec8d105ba5",
+                "responses": {
+                    "200": {
+                        "description": "Post successfully deleted."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StorePostRequest": {
+                "required": [
+                    "user_id",
+                    "title",
+                    "content",
+                    "tags"
+                ],
+                "properties": {
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "published": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
