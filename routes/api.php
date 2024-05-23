@@ -9,5 +9,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->except(['create', 'edit','update','store']);
 });

@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        return response(['message'=>'You successfully login']);
     }
 
     /**
@@ -33,6 +33,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response()->noContent();
+        return response(['message'=>'You successfully logout']);
     }
 }
