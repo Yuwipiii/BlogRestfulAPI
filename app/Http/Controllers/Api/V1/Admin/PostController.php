@@ -7,17 +7,21 @@ use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Http\Request;
+
+
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Post as PostMethod;
 use OpenApi\Attributes\Put;
 use OpenApi\Attributes\Delete;
 use OpenApi\Attributes\Info;
 use OpenApi\Attributes\Response as OpenApiResponse;
-use OpenApi\Attributes\Tag;
 
 #[Info(
     version: '1.0',
     title: 'Blog Restful Api',
+
 )]
 class PostController extends Controller implements HasMiddleware
 {
@@ -26,7 +30,7 @@ class PostController extends Controller implements HasMiddleware
         summary: 'Get all posts',
         tags: ['Posts'],
         responses: [
-            new OpenApiResponse(response: 200, description: "Get list of all posts."),
+            new OpenApiResponse(response: 200, description: "Get list of all posts.",content: new JsonContent()),
             new OpenApiResponse(response: 403, description: "Unauthorized"),
         ]
     )]
@@ -133,6 +137,16 @@ class PostController extends Controller implements HasMiddleware
         }
         $post->delete();
         return response()->json(['message' => 'Post successfully deleted']);
+    }
+
+    public function search(Request $request): JsonResponse
+    {
+        $request->validate(['search' => 'string|required']);
+        $posts = Post::with('tags', 'comments')->where(function ($query) use ($request) {
+            $query->where('title', 'LIKE', '%' . $request->get('search') . '%');
+            $query->orWhere('content', 'LIKE', '%' . $request->get('search') . '%');
+        })->paginate(8);
+        return response()->json($posts);
     }
 
     public static function middleware(): array

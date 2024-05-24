@@ -12,4 +12,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum','admin'])->prefix('v1')->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'edit','update','store']);
     Route::apiResource('posts', PostController::class);
+    Route::post('posts/search', [PostController::class, 'search'])->name('posts.search');
 });
