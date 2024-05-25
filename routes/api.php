@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\CommentController;
 use App\Http\Controllers\Api\V1\Admin\PostController;
 use App\Http\Controllers\Api\V1\Admin\TagController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
@@ -16,4 +17,6 @@ Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
     Route::post('posts/search', [PostController::class, 'search'])->name('posts.search');
     Route::apiResource('tags', TagController::class);
     Route::post('tags/search', [TagController::class, 'search'])->name('tags.search');
+    Route::apiResource('comments', CommentController::class);
+    Route::post('comments/search', [CommentController::class, 'search'])->name('comments.search');
 });
