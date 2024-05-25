@@ -6,7 +6,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    schema: "User",
+    description: "User model",
+    properties: [
+        new OA\Property(property: "id", description: "ID of the user", type: "integer"),
+        new OA\Property(property: "name", description: "Name of the user", type: "string"),
+        new OA\Property(property: "email", description: "Email of the user", type: "string"),
+    ],
+)]
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

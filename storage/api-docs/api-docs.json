@@ -1,0 +1,449 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Blog Restful Api",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all posts",
+                "operationId": "b72cf9a0d3fc5b581704f37544dcabd0",
+                "responses": {
+                    "200": {
+                        "description": "Get list of all posts.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Create a new post",
+                "operationId": "c8077d2d8e4c978334bdda870b30f580",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Post created successfully."
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/posts/{id}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get a single post",
+                "operationId": "0cd542c8e540e13a24b55eaa9c9befad",
+                "responses": {
+                    "200": {
+                        "description": "Get a single post."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Update an existing post",
+                "operationId": "5540e078e8094054fc2e0e2e3e9fa51c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post updated successfully."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Delete a post",
+                "operationId": "06a949b26c820d24557405ec8d105ba5",
+                "responses": {
+                    "200": {
+                        "description": "Post successfully deleted."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/posts/search": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Search post",
+                "operationId": "2b653594ec9122aba0b216899b5ada91",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SearchPostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Posts found"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tags": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get all tags",
+                "operationId": "c8f3f23b201e8136d077485b197787f1",
+                "responses": {
+                    "200": {
+                        "description": "Get list of all tags.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Create a new tag",
+                "operationId": "f4d63e9f914ce1cbd0fddd657338c650",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag created successfully."
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tag/{id}": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get a single tag",
+                "operationId": "5a7f77930302ceca2dc6f5d9aa50542a",
+                "responses": {
+                    "200": {
+                        "description": "Get a single tag."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tags/{id}": {
+            "put": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Update an existing tag",
+                "operationId": "2204ffdd63bd24b1a11e85294d7e08ad",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tag updated successfully."
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Delete a tag",
+                "operationId": "64be78971284a0c7318617f8e87ba736",
+                "responses": {
+                    "200": {
+                        "description": "Tag successfully deleted."
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tags/search": {
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Search tag",
+                "operationId": "2d44637cc3baeaa436f35156cafb4b6b",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SearchTagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag found."
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "SearchPostRequest": {
+                "required": [
+                    "search"
+                ],
+                "properties": {
+                    "search": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePostRequest": {
+                "required": [
+                    "user_id",
+                    "title",
+                    "content",
+                    "tags"
+                ],
+                "properties": {
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "published": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchTagRequest": {
+                "required": [
+                    "search"
+                ],
+                "properties": {
+                    "search": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTagRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "posts": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "description": "Comment model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the comment",
+                        "type": "integer"
+                    },
+                    "post_id": {
+                        "description": "ID of the post",
+                        "type": "integer"
+                    },
+                    "content": {
+                        "description": "Content of the comment",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Post": {
+                "description": "Post model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the post",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "description": "ID of the user who created the post",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Title of the post",
+                        "type": "string"
+                    },
+                    "content": {
+                        "description": "Content of the post",
+                        "type": "string"
+                    },
+                    "published_at": {
+                        "description": "Publication date and time of the post",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "published": {
+                        "description": "Publication status of the post",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "Tag": {
+                "description": "Tag model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the tag",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the tag",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the user",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the user",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of the user",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

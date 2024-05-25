@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'is_admin' => true,
         ]);
-
+        User::factory()->count(5)->create();
         Tag::factory()->count(10)->create();
         Post::factory()->count(50)->create();
         Comment::factory()->count(50)->create();
