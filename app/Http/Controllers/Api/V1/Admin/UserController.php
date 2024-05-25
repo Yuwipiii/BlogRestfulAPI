@@ -23,10 +23,10 @@ class UserController extends Controller implements HasMiddleware
     public function show(string $id): \Illuminate\Http\JsonResponse
     {
         $user = User::all()->find($id);
-        if($user == null){
-            return response()->json(['message'=>'User not found'],404);
+        if ($user == null) {
+            return response()->json(['message' => 'User not found'], 404);
         }
-        return response()->json([$user->toArray()],200);
+        return response()->json([$user->toArray()], 200);
     }
 
     /**
@@ -35,15 +35,17 @@ class UserController extends Controller implements HasMiddleware
     public function destroy(string $id): \Illuminate\Http\JsonResponse
     {
         $user = User::all()->find($id);
-        if($user == null){
-            return response()->json(['message'=>'User not found'],404);
+        if ($user == null) {
+            return response()->json(['message' => 'User not found'], 404);
         }
         $user->delete();
-        return response()->json(['message'=>'User successfully delete'],200);
+        return response()->json(['message' => 'User successfully delete'], 200);
     }
 
     public static function middleware(): array
     {
-        return ['admin'];
+        return [
+//            'admin'
+        ];
     }
 }

@@ -8,11 +8,9 @@ use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Http\Request;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Post as PostMethod;
-use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Put;
 use OpenApi\Attributes\Delete;
 use OpenApi\Attributes\Info;
@@ -146,12 +144,13 @@ class PostController extends Controller implements HasMiddleware
             content: new \OpenApi\Attributes\JsonContent(
                 ref: '#/components/schemas/SearchPostRequest'
             )),
-            tags: ['Posts'],
-            responses: [
-                new OpenApiResponse(response: 201, description: "Post created successfully."),
-                new OpenApiResponse(response: 403, description: "Unauthorized"),
-            ]
-        )]
+        tags: ['Posts'],
+        responses: [
+            new OpenApiResponse(response: 201, description: "Posts found"),
+            new OpenApiResponse(response: 404, description: "Post not found"),
+            new OpenApiResponse(response: 403, description: "Unauthorized"),
+        ]
+    )]
     public function search(SearchPostRequest $request): JsonResponse
     {
         $request->validated();
@@ -165,7 +164,7 @@ class PostController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-//            'admin'
+            'admin'
         ];
     }
 }

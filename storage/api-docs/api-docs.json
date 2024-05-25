@@ -131,7 +131,152 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Post created successfully."
+                        "description": "Posts found"
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tags": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get all tags",
+                "operationId": "c8f3f23b201e8136d077485b197787f1",
+                "responses": {
+                    "200": {
+                        "description": "Get list of all tags.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Create a new tag",
+                "operationId": "f4d63e9f914ce1cbd0fddd657338c650",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag created successfully."
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tag/{id}": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get a single tag",
+                "operationId": "5a7f77930302ceca2dc6f5d9aa50542a",
+                "responses": {
+                    "200": {
+                        "description": "Get a single tag."
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tags/{id}": {
+            "put": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Update an existing tag",
+                "operationId": "2204ffdd63bd24b1a11e85294d7e08ad",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tag updated successfully."
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Delete a tag",
+                "operationId": "64be78971284a0c7318617f8e87ba736",
+                "responses": {
+                    "200": {
+                        "description": "Tag successfully deleted."
+                    },
+                    "404": {
+                        "description": "Tag not found"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/tags/search": {
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Search tag",
+                "operationId": "2d44637cc3baeaa436f35156cafb4b6b",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SearchTagRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tag found."
+                    },
+                    "404": {
+                        "description": "Tag not found"
                     },
                     "403": {
                         "description": "Unauthorized"
@@ -178,6 +323,34 @@
                     },
                     "published": {
                         "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchTagRequest": {
+                "required": [
+                    "search"
+                ],
+                "properties": {
+                    "search": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTagRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "posts": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
                     }
                 },
                 "type": "object"

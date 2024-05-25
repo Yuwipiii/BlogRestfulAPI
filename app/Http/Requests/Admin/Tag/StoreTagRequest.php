@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Admin\Post;
+namespace App\Http\Requests\Admin\Tag;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OA;
 #[OA\Schema(
-    schema: "SearchPostRequest",
-    required: ['search'],
+    schema: "StoreTagRequest",
+    required: ['name'],
     properties: [
-        new OA\Property(property: "search", type: "string")
+        new OA\Property(property: "name", type: "string"),
     ]
 )]
-class SearchPostRequest extends FormRequest
+class StoreTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class SearchPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'search' => ['string','required','min:3','max:100'],
+            'name' => ['required','string','unique:tags,name'],
         ];
     }
 }
