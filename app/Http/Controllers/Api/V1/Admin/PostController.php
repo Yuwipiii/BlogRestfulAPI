@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Post\SearchPostRequest;
 use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Http\Request;
-
-
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Post as PostMethod;
+use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Put;
 use OpenApi\Attributes\Delete;
 use OpenApi\Attributes\Info;
@@ -30,7 +30,7 @@ class PostController extends Controller implements HasMiddleware
         summary: 'Get all posts',
         tags: ['Posts'],
         responses: [
-            new OpenApiResponse(response: 200, description: "Get list of all posts.",content: new JsonContent()),
+            new OpenApiResponse(response: 200, description: "Get list of all posts.", content: new JsonContent()),
             new OpenApiResponse(response: 403, description: "Unauthorized"),
         ]
     )]
@@ -139,9 +139,22 @@ class PostController extends Controller implements HasMiddleware
         return response()->json(['message' => 'Post successfully deleted']);
     }
 
-    public function search(Request $request): JsonResponse
+    #[PostMethod(
+        path: '/api/v1/posts/search',
+        summary: 'Search post',
+        requestBody: new \OpenApi\Attributes\RequestBody(
+            content: new \OpenApi\Attributes\JsonContent(
+                ref: '#/components/schemas/SearchPostRequest'
+            )),
+            tags: ['Posts'],
+            responses: [
+                new OpenApiResponse(response: 201, description: "Post created successfully."),
+                new OpenApiResponse(response: 403, description: "Unauthorized"),
+            ]
+        )]
+    public function search(SearchPostRequest $request): JsonResponse
     {
-        $request->validate(['search' => 'string|required']);
+        $request->validated();
         $posts = Post::with('tags', 'comments')->where(function ($query) use ($request) {
             $query->where('title', 'LIKE', '%' . $request->get('search') . '%');
             $query->orWhere('content', 'LIKE', '%' . $request->get('search') . '%');
@@ -152,7 +165,7 @@ class PostController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            'admin'
+//            'admin'
         ];
     }
 }

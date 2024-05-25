@@ -14,7 +14,12 @@
                 "operationId": "b72cf9a0d3fc5b581704f37544dcabd0",
                 "responses": {
                     "200": {
-                        "description": "Get list of all posts."
+                        "description": "Get list of all posts.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "403": {
                         "description": "Unauthorized"
@@ -107,10 +112,47 @@
                     }
                 }
             }
+        },
+        "/api/v1/posts/search": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Search post",
+                "operationId": "2b653594ec9122aba0b216899b5ada91",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SearchPostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Post created successfully."
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "SearchPostRequest": {
+                "required": [
+                    "search"
+                ],
+                "properties": {
+                    "search": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "StorePostRequest": {
                 "required": [
                     "user_id",
@@ -185,21 +227,6 @@
                     "published": {
                         "description": "Publication status of the post",
                         "type": "boolean"
-                    },
-                    "user": {
-                        "$ref": "#/components/schemas/User"
-                    },
-                    "tags": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Tag"
-                        }
-                    },
-                    "comments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Comment"
-                        }
                     }
                 },
                 "type": "object"
@@ -232,18 +259,6 @@
                     "email": {
                         "description": "Email of the user",
                         "type": "string"
-                    },
-                    "comments": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Comment"
-                        }
-                    },
-                    "posts": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Post"
-                        }
                     }
                 },
                 "type": "object"
