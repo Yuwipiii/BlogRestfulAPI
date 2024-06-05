@@ -34,7 +34,7 @@ class PostController extends Controller implements HasMiddleware
     )]
     public function index(): JsonResponse
     {
-        $posts = Post::with('user', 'tags')->paginate(8);
+        $posts = Post::with('user', 'tags')->get();
         return response()->json($posts);
     }
 

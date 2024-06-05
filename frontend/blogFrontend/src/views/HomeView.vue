@@ -7,8 +7,9 @@ export default {
 </script>
 
 <template>
-    <h1>
-    </h1>
+    <div class="flex justify-center">
+        <p class="text-xl">Welcome to blog</p>
+    </div>
 </template>
 
 <style scoped>

@@ -8,12 +8,12 @@ export default function usePosts(){
 
     const getPosts = async ()=>{
         const response =  await axios.get('admin/posts');
-        posts.value = response.data.data;
+        posts.value = response.data;
     }
 
     const getPost = async (id)=>{
-        const response = await axios.get('admin/posts'+id);
-        post.value = response.data;
+        const response = await axios.get('admin/posts/'+id);
+        post.value = response.data
     }
     return {
         post,
