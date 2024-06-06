@@ -9,10 +9,10 @@ onMounted(() => getPosts());
 
 <template>
     <div>
-        <h1>Post list</h1>
-        <div class="grid grid-cols-3 gap-1">
-            <div v-for="post in posts" :key="post.id">
-                <PostCard class="col-span-1" :post="post"></PostCard>
+        <h1 class="text-center font-bold text-2xl pb-20">Post List</h1>
+        <div class="flex flex-col gap-2 justify-items-stretch">
+            <div class="mb-5" v-for="post in posts" :key="post.id">
+                <PostCard class="flex-1" :post="post"></PostCard>
             </div>
         </div>
     </div>

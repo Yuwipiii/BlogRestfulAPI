@@ -29,7 +29,7 @@ class TagController extends Controller implements HasMiddleware
     )]
     public function index(): \Illuminate\Http\JsonResponse
     {
-        $tags = Tag::with('posts')->paginate(8);
+        $tags = Tag::with('posts')->get();
         return response()->json($tags);
     }
 
@@ -143,7 +143,7 @@ class TagController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            'admin'
+//            'admin'
         ];
     }
 }

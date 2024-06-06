@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-    <div @click="showPost" class="rounded shadow-lg px-6 pt-4 pb-2">
+    <div @click="showPost" class="rounded shadow-md bg-gray-100 px-6 pt-4 pb-2">
         <div>
             <div class="font-bold text-xl mb-2">{{ post['title'] }}</div>
             <p class="text-gray-700 text-base truncate">
