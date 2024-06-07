@@ -14,10 +14,16 @@ export default function useTags(){
         const response = await axios.get('admin/tags/'+id);
         tag.value= response.data;
     }
+    const destroyTag = async (id)=>{
+        await axios.delete('admin/tags/'+id);
+        tags.value = tags.value.filter(p => p.id !== id);
+    }
+
     return{
         tag,
         tags,
         getTag,
-        getTags
+        getTags,
+        destroyTag
     }
 }
