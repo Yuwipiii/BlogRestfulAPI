@@ -1,9 +1,12 @@
-import {createRouter, createWebHistory} from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import PostsList from "@/views/posts/PostsList.vue";
-import PostShow from "@/views/posts/PostShow.vue";
-import TagsShow from "@/views/tags/TagsShow.vue";
-import TagList from "@/views/tags/TagList.vue";
+import {createRouter, createWebHistory} from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import PostShowView from "../views/posts/PostShowView.vue";
+import PostCreateView from "../views/posts/PostCreateView.vue";
+import PostEditView from "../views/posts/PostEditView.vue";
+import TagsShowView from "../views/tags/TagsShowView.vue";
+import TagListView from "../views/tags/TagListView.vue";
+import PostsListView from "../views/posts/PostsListView.vue";
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,24 +17,34 @@ const router = createRouter({
             component: HomeView
         },
         {
-          path:'/posts',
-            name:'postList',
-            component:PostsList
+            path: '/posts',
+            name: 'postsList',
+            component: PostsListView
         },
         {
-            path:'/posts/:id',
-            name:'postShow',
-            component:PostShow,
+            path: '/posts/:id',
+            name: 'postShow',
+            component: PostShowView,
         },
         {
-            path:'/tags/:id',
-            name:'tagShow',
-            component:TagsShow
+            path: '/posts/create',
+            name: 'postCreate',
+            component: PostCreateView
         },
         {
-            path:'/tags',
-            name:'tagList',
-            component:TagList
+            path: '/posts/:id/edit',
+            name: 'postEdit',
+            component: PostEditView
+        },
+        {
+            path: '/tags/:id',
+            name: 'tagShow',
+            component: TagsShowView
+        },
+        {
+            path: '/tags',
+            name: 'tagList',
+            component: TagListView
         }
     ]
 })
