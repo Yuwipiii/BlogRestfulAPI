@@ -1,6 +1,5 @@
 import {ref} from 'vue';
 import axios from "axios";
-import router from "@/router/index.js";
 axios.defaults.baseURL = "http://127.0.0.1:8000/api/v1/"
 
 export default function usePosts(){
@@ -17,9 +16,6 @@ export default function usePosts(){
         post.value = response.data
     }
     const destroyPost = async (id)=>{
-        if(!window.confirm("Are you sure?")){
-            return;
-        }
         await axios.delete('admin/posts/'+id);
     }
     return {
