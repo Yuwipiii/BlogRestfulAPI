@@ -27,7 +27,14 @@ export default function usePosts(){
         }
     }
     const updatePost = async (data)=>{
-
+        try{
+            await axios.put('admin/posts',data);
+            await router.push({name:'postsList'});
+        }catch (error){
+            if(error.response.status === 422){
+                errors.value = error.response.data.errors;
+            }
+        }
     }
 
     const getPost = async (id)=>{
@@ -42,6 +49,8 @@ export default function usePosts(){
         posts,
         getPosts,
         getPost,
-        destroyPost
+        destroyPost,
+        storePost,
+        errors
     }
 }
