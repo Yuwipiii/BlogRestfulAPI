@@ -18,6 +18,8 @@ export default function usePosts(){
 
     const storePost = async (data)=>{
         try{
+
+
             await axios.post('admin/posts',data);
             await router.push({name:'postsList'});
         }catch (error){
